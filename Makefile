@@ -36,7 +36,7 @@ clean:
 	rm -rf bin release
 
 lint_install:
-	$(GO_NOMOD) get -u golang.org/x/lint/golint
+	$(GO) get -u golang.org/x/lint/golint
 
 .PHONY: lint
 lint: lint_install
