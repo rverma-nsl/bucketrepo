@@ -30,7 +30,7 @@ install:
 .PHONY: fmt
 fmt:
 	@echo "FORMATTING"
-	@FORMATTED=`$(GO) fmt ./...`
+	@FORMATTED=`$(GO) fmt ./internal/...`
 	@([[ ! -z "$(FORMATTED)" ]] && printf "Fixed unformatted files:\n$(FORMATTED)") || true
 
 .PHONY: clean
@@ -43,9 +43,9 @@ lint_install:
 .PHONY: lint
 lint: lint_install
 	@echo "LINTING"
-	$(GOLINT) -set_exit_status ./...
+	$(GOLINT) -set_exit_status ./internal/...
 	@echo "VETTING"
-	$(GO) vet ./... 
+	$(GO) vet ./internal/...
 
 sec_install:
 	$(GO_NOMOD) get -u github.com/securego/gosec/cmd/gosec
@@ -53,7 +53,7 @@ sec_install:
 .PHONY: sec
 sec: sec_install
 	@echo "SECURITY SCANNING"
-	$(GOSEC) -fmt=csv ./...
+	$(GOSEC) -fmt=csv ./internal/...
 
 docker:
 	docker buildx build --platform="linux/amd64,linux/arm64" --push -t ghcr.io/nslhb/bucketrepo:$(IMAGE_TAG) .
