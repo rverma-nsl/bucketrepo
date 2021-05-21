@@ -21,7 +21,7 @@ build:
 
 .PHONY: test
 test: 
-	CGO_ENABLED=$(CGO_ENABLED) $(GO) test ./... -test.v
+	CGO_ENABLED=$(CGO_ENABLED) $(GO) test ./internal/... -test.v
 
 .PHONY: install
 install:
