@@ -5,11 +5,11 @@ http:
     chartPath: "charts"
 
 storage:
-    enabled: false
-    bucket_url: "gs://bucketrepo"
+    enabled: true
+    bucket_url: "s3://nsl-artifacts"
 
 cache:
-    base_dir: "/tmp/bucketrepo"
+    base_dir: "/tmp"
 
 repositories:
     - url: "https://repo1.maven.org/maven2"
