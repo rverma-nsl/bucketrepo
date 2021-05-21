@@ -54,8 +54,7 @@ sec: sec_install
 	$(GOSEC) -fmt=csv ./...
 
 linux:
-	CGO_ENABLED=$(CGO_ENABLED) GOOS=linux GOARCH=amd64 $(GO) build -ldflags $(BUILDFLAGS) -o bin/$(NAME) $(MAIN_GO)
+	CGO_ENABLED=$(CGO_ENABLED) $(GO) build -ldflags $(BUILDFLAGS) -o bin/$(NAME) $(MAIN_GO)
 
 docker: linux
-	docker build -t jenkinsxio/bucketrepo:latest .
-
+	docker buildx build --platform="linux/amd64,linux/arm64" --push -t ghcr.io/nslhb/bucketrepo:latest .
