@@ -53,8 +53,5 @@ sec: sec_install
 	@echo "SECURITY SCANNING"
 	$(GOSEC) -fmt=csv ./...
 
-linux:
-	CGO_ENABLED=$(CGO_ENABLED) $(GO) build -ldflags $(BUILDFLAGS) -o bin/$(NAME) $(MAIN_GO)
-
-docker: linux
+docker: build
 	docker buildx build --platform="linux/amd64,linux/arm64" --push -t ghcr.io/nslhb/bucketrepo:latest .
