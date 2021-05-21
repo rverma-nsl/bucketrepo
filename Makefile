@@ -10,6 +10,8 @@ BUILDFLAGS := ''
 CGO_ENABLED = 0
 GOSEC := GO111MODULE=on $(GOPATH)/bin/gosec
 GOLINT := GO111MODULE=on $(GOPATH)/bin/golint
+IMAGE_TAG?=$(shell git rev-parse --short HEAD)
+
 
 all: build fmt lint sec test
 
@@ -36,7 +38,7 @@ clean:
 	rm -rf bin release
 
 lint_install:
-	$(GO) get -u golang.org/x/lint/golint
+	$(GO_NOMOD) get -u golang.org/x/lint/golint
 
 .PHONY: lint
 lint: lint_install
@@ -54,4 +56,4 @@ sec: sec_install
 	$(GOSEC) -fmt=csv ./...
 
 docker:
-	docker buildx build --platform="linux/amd64,linux/arm64" --push -t ghcr.io/nslhb/bucketrepo:latest .
+	docker buildx build --platform="linux/amd64,linux/arm64" --push -t ghcr.io/nslhb/bucketrepo:$(IMAGE_TAG) .
