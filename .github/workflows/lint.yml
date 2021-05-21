@@ -17,3 +17,6 @@ jobs:
 
       - name: Lint
         run: make all
+        env:
+          GOPATH: /home/runner/work/bucketrepo/bucketrepo/go
+
