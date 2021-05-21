@@ -3,8 +3,7 @@ WORKDIR /go/src/app
 COPY . .
 RUN make build
 
-FROM gcr.io/distroless/base:nonroot
-
-COPY --chown=nonroot:nonroot ./config/config.yaml ./
-COPY --from=build --chown=nonroot:nonroot ./go/src/app/bin ./
-CMD ["/home/nonroot/bucketrepo"]
+FROM alpine:3.12.0
+COPY --chown=nonroot:nonroot ./config/config.yaml /
+COPY --from=build --chown=nonroot:nonroot ./go/src/app/bin /
+CMD ["/bucketrepo"]
