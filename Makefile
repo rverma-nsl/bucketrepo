@@ -53,5 +53,5 @@ sec: sec_install
 	@echo "SECURITY SCANNING"
 	$(GOSEC) -fmt=csv ./...
 
-docker: build
+docker:
 	docker buildx build --platform="linux/amd64,linux/arm64" --push -t ghcr.io/nslhb/bucketrepo:latest .
